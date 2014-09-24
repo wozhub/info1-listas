@@ -15,16 +15,14 @@
 
 void prueba( int CANTIDAD );
 
-void main()
-{
+void main() {
     prueba(25000);
     prueba(50000);
     prueba(75000);
     prueba(100000);
 }
 
-void prueba( int CANTIDAD )
-{
+void prueba( int CANTIDAD ) {
     int start, end;
     int dif;
 
@@ -34,8 +32,7 @@ void prueba( int CANTIDAD )
     srand (time(NULL));
     unsigned int i,valor;
     printf("Creando la lista de %d elementos...\n",CANTIDAD);
-    for (i=0;i<CANTIDAD;i++)
-    {
+    for (i=0;i<CANTIDAD;i++) {
         valor=rand() % 100;
         t_elemento *nuevoA=nuevoElemento();
         t_elemento *nuevoB=nuevoElemento();

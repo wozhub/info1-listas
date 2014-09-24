@@ -12,14 +12,12 @@
 
 #define CANTIDAD 20 //numero de elementos en la lista
 
-void main()
-{
+void main() {
     t_elemento *lista=NULL;
 
     srand (time(NULL));
     unsigned int i,valor;
-    for (i=0;i<CANTIDAD;i++)
-    {
+    for (i=0;i<CANTIDAD;i++) {
         valor=rand() % 100;
         t_elemento *nuevo=nuevoElemento();
         nuevo->valor=valor;
