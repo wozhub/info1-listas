@@ -11,11 +11,9 @@
 
 //FUNCIONES CON PERSONAS
 
-t_persona* nuevaPersona()
-{
+t_persona* nuevaPersona() {
     t_persona *persona = malloc( sizeof(t_persona) );
-    if ( persona != NULL )
-    {
+    if ( persona != NULL ) {
         printf("Nombre: ");
         scanf("%s",persona->nombre);
         printf("Edad: ");
@@ -24,44 +22,35 @@ t_persona* nuevaPersona()
     return persona;
 };
 
-void verPersona(t_persona* persona)
-{
+void verPersona(t_persona* persona) {
     printf("Nombre: %s\tEdad: %d\n",persona->nombre,persona->edad);
 }
 
 // FUNCIONES CON ELEMENTOS
 
-t_elemento* nuevoElemento()
-{
+t_elemento* nuevoElemento() {
     t_elemento *elemento = malloc( sizeof(t_elemento) );
-    if ( (elemento) != NULL )
-    {
+    if ( (elemento) != NULL ) {
         elemento->persona=nuevaPersona();
         elemento->siguiente=NULL;
     }
     return elemento;
 };
 
-void verElemento(t_elemento* elemento)
-{
+void verElemento(t_elemento* elemento) {
     printf("pos de memoria: %d\n",elemento);
     verPersona(elemento->persona);
 }
 
-void borrarElemento(t_manipulador *lista, int pos)
-{
+void borrarElemento(t_manipulador *lista, int pos) {
     if ( pos == -1 ) { pos=lista->cantidad-1; } 
     if ( lista->cantidad == 0 || pos >= lista->cantidad  ) { return; } //caso especial: la pos no existe
-    else if ( pos == 0 ) //caso especial: borrar el primer elemento. no tiene anterior
-    {   
+    else if ( pos == 0 ) { //caso especial: borrar el primer elemento. no tiene anterior
         t_elemento *elemento=lista->primero;
         free(elemento->persona);
         lista->primero=elemento->siguiente;
         free(elemento);
-    }
-    else
-    {   
-
+    } else {   
         /* busco la pos anterior al elemento a borrar*/
         t_elemento *elemento=lista->primero;
         unsigned int i;
@@ -80,11 +69,9 @@ void borrarElemento(t_manipulador *lista, int pos)
 
 //FUNCIONES CON EL MANIPULADOR DE LISTAS
 
-t_manipulador* nuevoManipulador()
-{
+t_manipulador* nuevoManipulador() {
     t_manipulador *lista = (t_manipulador *) malloc( sizeof(t_manipulador) );
-    if ( lista != NULL )
-    {
+    if ( lista != NULL ) {
         lista->primero=NULL;
         lista->ultimo=NULL;
         lista->cantidad=0;
@@ -92,52 +79,43 @@ t_manipulador* nuevoManipulador()
     return lista;
 };
 
-void verLista(t_manipulador *lista)
-{
+void verLista(t_manipulador *lista) {
     printf("\n\n");
     printf("La lista tiene %d elementos\n",lista->cantidad);
     t_elemento *elemento=lista->primero;
 
     unsigned int i;
-    for (i=0; elemento != NULL; i++)
-    {
+    for (i=0; elemento != NULL; i++) {
       printf("elemento #%d\n",i);
       verElemento(elemento);
       elemento=elemento->siguiente;  
     } 
 }
 
-void borrarLista(t_manipulador *lista)
-{
+void borrarLista(t_manipulador *lista) {
     printf("Borrando LISTA!");
-
     while (lista->cantidad != 0)
     { borrarElemento(lista,0); }
-
     free(lista);
 }
 
-void cargarLista(t_manipulador *lista, unsigned int cantidad)
-{
+void cargarLista(t_manipulador *lista, unsigned int cantidad) {
    unsigned int i;
-   for (i=0;i<cantidad;i++)
-   {
+   for (i=0;i<cantidad;i++) {
         t_elemento *elemento=nuevoElemento();
         agregarElemento(lista,elemento,-1); //agrego en la primera pos
    }
 }
 
-void agregarElemento(t_manipulador *lista, t_elemento *elemento, int pos)
-{
+void agregarElemento(t_manipulador *lista, t_elemento *elemento, int pos) {
     //d printf("Agregando elemento a la pos %d/%d\n",pos,lista->cantidad);
 
-    if ( pos == 0 || lista->cantidad == 0 )
-    {   //d printf("Adelante!\n");
+    if ( pos == 0 || lista->cantidad == 0 ) {
+        //d printf("Adelante!\n");
         elemento->siguiente=lista->primero;
         lista->primero=elemento;
-    }
-    else if ( pos == -1 || pos > lista->cantidad )
-    {   //d printf("Al fondo!\n");
+    } else if ( pos == -1 || pos > lista->cantidad ) {
+       //d printf("Al fondo!\n");
         lista->ultimo->siguiente=elemento;
         lista->ultimo=elemento;
     }

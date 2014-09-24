@@ -8,8 +8,8 @@
 #include "estructuras.h"    //los structs
 #include "funciones.h"      //para manejar la lista, sus elementos y los structs ordenados
 
-int main()
-{
+int main() {
+
     t_manipulador *lista;
     lista = nuevoManipulador();
 
