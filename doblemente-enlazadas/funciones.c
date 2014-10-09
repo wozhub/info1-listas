@@ -38,7 +38,10 @@ void verListaReverse(t_elemento **lista) {
 
 //recibe un puntero a la lista y un elemento y lo agrega al principio!
 void agregarElemento(t_elemento **lista, t_elemento *nuevo) {
-    //d printf("Agregando el elemento de valor %d a la lista\n",nuevo->valor);
+    #ifdef DEBUG
+    printf("Agregando el elemento de valor %d a la lista\n",nuevo->valor);
+    #endif
+
     nuevo->siguiente=*lista;
     if ( *lista != NULL ) { (*lista)->anterior=nuevo;}
     *lista=nuevo;
@@ -84,15 +87,20 @@ void SelectionSortA(struct t_elemento **lista1)
             elemento=elemento->siguiente;
             pos++;
         } while ( elemento != NULL );
-        //d printf("Maximo=%d\tPos=%d\n",maximo,pos_max);
+        
+        #ifdef DEBUG
+        printf("Maximo=%d\tPos=%d\n",maximo,pos_max);
+        #endif
         
         t_elemento *nuevo=nuevoElemento();
         nuevo->valor=maximo;
         agregarElemento(&lista2,nuevo);
 
         borrarElemento(lista1,pos_max);
-        //d verLista(lista1);
-        //d verLista(&lista2);
+        #ifdef DEBUG
+        verLista(lista1);
+        verLista(&lista2);
+        #endif
     }
     *lista1=lista2;
 }
@@ -117,10 +125,17 @@ void SelectionSortB(struct t_elemento **lista1)
             elemento=elemento->siguiente;
             pos++;
         } while ( elemento != NULL );
-        //d printf("Maximo=%d\tPos=%d\n",maximo,pos_max);
+
+        #ifdef DEBUG
+        printf("Maximo=%d\tPos=%d\n",maximo,pos_max);
+        #endif
+
         trasladarElemento(lista1,pos_max,&lista2);
-        //d verLista(lista1);
-        //d verLista(&lista2);
+       
+        #ifdef DEBUG
+        verLista(lista1);
+        verLista(&lista2);
+        #endif
     }
     *lista1=lista2;
 }

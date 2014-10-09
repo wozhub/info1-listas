@@ -108,14 +108,22 @@ void cargarLista(t_manipulador *lista, unsigned int cantidad) {
 }
 
 void agregarElemento(t_manipulador *lista, t_elemento *elemento, int pos) {
-    //d printf("Agregando elemento a la pos %d/%d\n",pos,lista->cantidad);
+    #ifdef DEBUG
+    printf("Agregando elemento a la pos %d/%d\n",pos,lista->cantidad);
+    #endif
 
     if ( pos == 0 || lista->cantidad == 0 ) {
-        //d printf("Adelante!\n");
+        #ifdef DEBUG
+        printf("Adelante!\n");
+        #endif
+
         elemento->siguiente=lista->primero;
         lista->primero=elemento;
     } else if ( pos == -1 || pos > lista->cantidad ) {
-       //d printf("Al fondo!\n");
+        #ifdef DEBUG
+        printf("Al fondo!\n");
+        #endif
+
         lista->ultimo->siguiente=elemento;
         lista->ultimo=elemento;
     }
